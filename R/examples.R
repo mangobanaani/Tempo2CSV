@@ -7,7 +7,7 @@ options(gsubfn.engine = "R")
 library(sqldf)
 t1 <- as.data.frame(values)
 
-sqldf("select sum(hours) as hours, billing_key, sum(hours*120) as eur from t1 group by billing_key order by sum(hours), billing_key")
+sqldf("select sum(hours) as hours, billing_key from t1 group by billing_key order by sum(hours), billing_key")
 
 -- 
 
@@ -50,5 +50,5 @@ v1 <- as.Date(t1$work_date)
 v2 <- as.double(t1$hours) 
 v.data <- data.frame(v1,v2)
 ggplot(v.data, aes(x=v1, y=v2,fill=v2,colour=v2)) + geom_point(size=1.5)+
-ggtitle("Hours per day 2015-2017 w/ regression")+xlab("year")+ylab("hours")+geom_point()+stat_smooth(method=lm, level=0.95)
+ggtitle("Hours per day w/ regression")+xlab("year")+ylab("hours")+geom_point()+stat_smooth(method=lm, level=0.95)
 
